@@ -12,7 +12,7 @@ def tensorflow(request: django.http.HttpRequest):
 	qualifiedIdentifier = request.GET.get('q', '').strip()
 	method = request.GET.get('m', '').strip()
 
-	qualifiedIdentifier = re.sub(r'^tensorflow_core\.python\.', 'tf.', qualifiedIdentifier)
+	qualifiedIdentifier = re.sub(r'^tensorflow_core\.(python\.)?', 'tf.', qualifiedIdentifier)
 
 	qualifiedIdentifier = fixNamespace(qualifiedIdentifier)
 
