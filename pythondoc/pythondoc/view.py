@@ -13,7 +13,10 @@ def fixNamespace(identifier):
 
 
 ruledConversions = {
-	'tensorflow_core.python.read_file': 'tf.io.read_file',
+	r'tensorflow_core\.python\.read_file': 'tf.io.read_file',
+	r'tensorflow_core\.python\.keras\.engine\.network\.Network\.([a-z]\w*)': r'tf.keras.Model#\1',
+	r'tensorflow_core\.python\.keras\.engine\.network\.Network': r'tf.keras.Model',
+	r'tensorflow_core\.python\.keras\.saving\.save\.([a-z]\w*)': r'tf.keras.models.\1',
 }
 
 
@@ -26,9 +29,15 @@ def tensorflow(request: django.http.HttpRequest):
 	isPermanentRedirect = version == ''
 	version = request.GET.get('v', version).strip()
 
-	if qualifiedIdentifier in ruledConversions:
-		qualifiedIdentifier = ruledConversions[qualifiedIdentifier]
-	else:
+	isProcessed = False
+	for pattern, replace in ruledConversions.items():
+		q, n = re.subn(pattern, replace, qualifiedIdentifier)
+		if n > 0:
+			isProcessed = True
+			qualifiedIdentifier = q
+			break
+
+	if not isProcessed:
 		qualifiedIdentifier = re.sub(r'^tensorflow_core\.(python\.)?', 'tf.', qualifiedIdentifier)
 
 		qualifiedIdentifier = fixNamespace(qualifiedIdentifier)
