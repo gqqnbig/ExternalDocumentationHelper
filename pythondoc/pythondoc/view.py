@@ -9,6 +9,7 @@ def index(request: django.http.HttpRequest):
 def fixNamespace(identifier):
 	identifier = re.sub(r'\.ops\.dataset_ops\.DatasetV\d\.', '.Dataset.', identifier)
 	identifier = re.sub(r'\.framework\.ops\.', '.', identifier)
+	identifier = re.sub(r'\.ops\.array_ops\.([a-z]\w*?)(_v\d)$', r'.\1', identifier)
 	return identifier
 
 
@@ -40,7 +41,7 @@ def tensorflow(request: django.http.HttpRequest):
 			break
 
 	if not isProcessed:
-		qualifiedIdentifier = re.sub(r'^tensorflow_core\.(python\.)?', 'tf.', qualifiedIdentifier)
+		qualifiedIdentifier = re.sub(r'^tensorflow(_core)?\.(python\.)?', 'tf.', qualifiedIdentifier)
 
 		qualifiedIdentifier = fixNamespace(qualifiedIdentifier)
 
