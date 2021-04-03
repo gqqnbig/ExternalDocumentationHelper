@@ -18,6 +18,7 @@ ruledConversions = {
 	r'tensorflow_core\.python\.keras\.engine\.network\.Network': r'tf.keras.Model',
 	r'tensorflow_core\.python\.keras\.saving\.save\.([a-z]\w*)': r'tf.keras.models.\1',
 	r'tensorflow\.python\.ops\.random_ops\.random_([a-z]\w*)': r'tf.random.\1',
+	r'tensorflow\.python\.ops\.confusion_matrix\.confusion_matrix': r'tf.math.confusion_matrix',
 }
 
 
