@@ -5,17 +5,19 @@ def fixNamespace(identifier: str):
 	if identifier == 'tf':
 		return 'tf.'
 
+	identifier = re.sub(r'\.text_dataset$', '', identifier)
+	identifier = re.sub(r'\.ops\.dataset_ops\.DatasetV\d$', '.Dataset', identifier)
+
 	p = identifier.rfind('.')
-	if p > -1 and p + 1 < len(identifier) and identifier[p + 1].upper():
+	if p > -1 and p + 1 < len(identifier) and identifier[p + 1].isupper():
 		identifier += '#'
 	else:
 		identifier += '.'
 
-	identifier = re.sub(r'\.ops\.dataset_ops\.DatasetV\d\.', '.Dataset.', identifier)
-	identifier = re.sub(r'\.framework\.ops\.', '.', identifier)
-	identifier = re.sub(r'\.ops\.array_ops\.([a-z]\w*?)(_v\d)$', r'.\1', identifier)
+	# identifier = re.sub(r'\.ops\.dataset_ops\.DatasetV\d\.', '.Dataset.', identifier)
+	# identifier = re.sub(r'\.framework\.ops\.', '.', identifier)
+	# identifier = re.sub(r'\.ops\.array_ops\.([a-z]\w*?)(_v\d)$', r'.\1', identifier)
 
-	identifier = re.sub(r'\.text_dataset$', '', identifier)
 	return identifier
 
 
@@ -40,15 +42,9 @@ def map(qualifiedIdentifier, method):
 	if not isProcessed:
 		qualifiedIdentifier = re.sub(r'^tensorflow(_core)?\.(python\.)?', 'tf.', qualifiedIdentifier)
 
-		# qualifiedIdentifier = fixNamespace(qualifiedIdentifier)
-
 		if qualifiedIdentifier.endswith('.' + method):
 			namespace = qualifiedIdentifier[:len(qualifiedIdentifier) - len('.' + method)]
 			namespace = fixNamespace(namespace)
 			qualifiedIdentifier = namespace + method
-	# if namespace == 'tf':
-	# 	# it's a static method under tf.
-	# 	qualifiedIdentifier = namespace + '.' + method
-	# else:
-	# 	qualifiedIdentifier = namespace + '#' + method
+			
 	return qualifiedIdentifier

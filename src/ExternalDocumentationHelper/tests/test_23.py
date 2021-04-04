@@ -11,4 +11,6 @@ import ExternalDocumentationHelper.django.pythondoc.mapping as mapping
 
 
 def test_Mapping():
+	assert mapping.map('tensorflow.python.data.ops.dataset_ops.DatasetV1.take', 'take') == 'tf.data.Dataset#take'
 	assert mapping.map('tensorflow.python.keras.preprocessing.text_dataset.text_dataset_from_directory', 'text_dataset_from_directory') == 'tf.keras.preprocessing.text_dataset_from_directory'
+	assert mapping.map('tensorflow.python.keras.Model.save', 'save') == 'tf.keras.Model#save'
