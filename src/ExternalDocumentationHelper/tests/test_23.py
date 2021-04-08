@@ -9,8 +9,14 @@ sys.path.append(os.path.join(testFolder, '../../'))
 # print(sys.path)
 import ExternalDocumentationHelper.django.pythondoc.mapping as mapping
 
+testData = [
+	('tensorflow.python.data.ops.dataset_ops.DatasetV1.take', 'take', 'tf.data.Dataset#take'),
+	('tensorflow.python.keras.preprocessing.text_dataset.text_dataset_from_directory', 'text_dataset_from_directory', 'tf.keras.preprocessing.text_dataset_from_directory'),
+	('tensorflow.python.keras.Model.save', 'save', 'tf.keras.Model#save'),
+	('tensorflow.python.ops.string_ops.regex_replace', 'regex_replace', 'tf.strings.regex_replace'),
+]
 
-def test_Mapping():
-	assert mapping.map('tensorflow.python.data.ops.dataset_ops.DatasetV1.take', 'take') == 'tf.data.Dataset#take'
-	assert mapping.map('tensorflow.python.keras.preprocessing.text_dataset.text_dataset_from_directory', 'text_dataset_from_directory') == 'tf.keras.preprocessing.text_dataset_from_directory'
-	assert mapping.map('tensorflow.python.keras.Model.save', 'save') == 'tf.keras.Model#save'
+
+@pytest.mark.parametrize('identifier, methodName, expected', testData)
+def test_Mapping(identifier, methodName, expected):
+	assert mapping.map(identifier, methodName) == expected
