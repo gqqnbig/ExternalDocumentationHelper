@@ -2,11 +2,14 @@ import re
 
 
 def fixNamespace(identifier: str):
+	assert identifier[-1] != '.'
+
 	if identifier == 'tf':
 		return 'tf.'
 
 	identifier = re.sub(r'\.text_dataset$', '', identifier)
 	identifier = re.sub(r'\.ops\.dataset_ops\.DatasetV\d$', '.Dataset', identifier)
+	identifier = re.sub(r'\.ops\.string_ops', '.strings', identifier)
 
 	p = identifier.rfind('.')
 	if p > -1 and p + 1 < len(identifier) and identifier[p + 1].isupper():
