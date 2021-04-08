@@ -9,7 +9,7 @@ def fixNamespace(identifier: str):
 
 	identifier = re.sub(r'\.text_dataset$', '', identifier)
 	identifier = re.sub(r'\.ops\.dataset_ops\.DatasetV\d$', '.Dataset', identifier)
-	identifier = re.sub(r'\.ops\.string_ops', '.strings', identifier)
+	identifier = re.sub(r'\.ops\.(ragged\.ragged_)?string_ops', '.strings', identifier)
 
 	p = identifier.rfind('.')
 	if p > -1 and p + 1 < len(identifier) and identifier[p + 1].isupper():
