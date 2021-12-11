@@ -15,6 +15,7 @@ testData = [
 	('tensorflow.python.keras.preprocessing.text_dataset.text_dataset_from_directory', 'text_dataset_from_directory', 'tf.keras.preprocessing.text_dataset_from_directory'),
 	('tensorflow.python.keras.Model.save', 'save', 'tf.keras.Model#save'),
 	('tensorflow.python.ops.string_ops.regex_replace', 'regex_replace', 'tf.strings.regex_replace'),
+	('tensorflow.python.feature_column.feature_column_v2.categorical_column_with_vocabulary_list','categorical_column_with_vocabulary_list', 'tf.feature_column.categorical_column_with_vocabulary_list')
 ]
 
 
