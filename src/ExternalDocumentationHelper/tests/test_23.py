@@ -10,6 +10,7 @@ sys.path.append(os.path.join(testFolder, '../../'))
 import ExternalDocumentationHelper.django.pythondoc.mapping as mapping
 
 testData = [
+	('tensorflow.python.ops.math_ops.argmax_v2', 'argmax_v2', 'tf.math.argmax'),
 	('tensorflow.python.ops.nn_ops.softmax_v2', 'softmax_v2', 'tf.nn.softmax'),
 	('tensorflow.python.ops.ragged.ragged_string_ops.unicode_split', 'unicode_split', 'tf.strings.unicode_split'),
 	('tensorflow.python.data.ops.dataset_ops.DatasetV1.take', 'take', 'tf.data.Dataset#take'),

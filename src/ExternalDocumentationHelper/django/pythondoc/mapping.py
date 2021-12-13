@@ -32,7 +32,7 @@ ruledConversions = {
 	r'tensorflow_core\.python\.keras\.saving\.save\.([a-z]\w*)': r'tf.keras.models.\1',
 	r'tensorflow\.python\.ops\.random_ops\.random_([a-z]\w*)': r'tf.random.\1',
 	r'tensorflow\.python\.ops\.confusion_matrix\.confusion_matrix': r'tf.math.confusion_matrix',
-	r'tensorflow\.python\.ops\.nn_ops\.([a-z]\w*)_v\d': r'tf.nn.\1',
+	r'tensorflow\.python\.ops\.([a-z]\w*)_ops\.([a-z]\w*)_v\d': r'tf.\1.\2',
 }
 
 
