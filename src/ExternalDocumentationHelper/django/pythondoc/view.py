@@ -8,6 +8,7 @@ import ExternalDocumentationHelper.django.pythondoc.mapping as mapping
 
 def index(request: django.http.HttpRequest):
 	version = request.COOKIES.get('v')
+	return django.http.HttpResponse('Welcome to the home page')
 
 
 def tensorflow(request: django.http.HttpRequest):

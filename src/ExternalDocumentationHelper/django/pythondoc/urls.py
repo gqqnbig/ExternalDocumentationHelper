@@ -17,5 +17,6 @@ from django.urls import path
 from . import view
 
 urlpatterns = [
+	path('', view.index),
 	path('python/tensorflow', view.tensorflow),
 ]
