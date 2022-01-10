@@ -1,0 +1,15 @@
+[Unit]
+Description=run uwsgi service for External Documentation Helper
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+WorkingDirectory=/var/www/ExternalDocumentationHelper
+Type=simple
+Restart=always
+RestartSec=0
+User=www-data
+ExecStart=/home/gqqnbig/miniconda3/envs/django32/bin/uwsgi --socket /var/www/ExternalDocumentationHelper/mysite.sock  --chmod-socket=666 --chdir src/ExternalDocumentationHelper/django --module pythondoc.wsgi --enable-threads
+
+[Install]
+WantedBy=multi-user.target
+
