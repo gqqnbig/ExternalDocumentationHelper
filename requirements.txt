@@ -1,0 +1,3 @@
+# In conda, translate ~= to =.
+
+django~=3.2
